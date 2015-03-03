@@ -1,0 +1,17 @@
+---
+- name: Add PPA
+  apt_repository: repo="ppa:chris-lea/redis-server"
+
+- name: Install Redis
+  apt: pkg=redis-server state=present dpkg_options="force-confdef,force-confnew"
+
+- name: Start Redis
+  service: name=redis-server state=started enabled=true
+  notify: restart redis
+
+- name: Configuring Redis.
+  template: src=etc-ansible-redis.conf.j2 dest=/etc/redis/ansible-redis.conf mode=644
+  notify: restart redis
+
+- name: Add custom config for Redis
+  lineinfile: dest=/etc/redis/redis.conf line="include /etc/redis/ansible-redis.conf"

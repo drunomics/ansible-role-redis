@@ -1,0 +1,31 @@
+---
+
+#redis
+#general settings
+redis_port: 6379
+redis_bind: 127.0.0.1
+redis_timeout: 0
+redis_loglevel: notice
+redis_logfile: /var/log/redis/redis-server.log
+redis_databases: 16
+
+#write back to disk settings
+redis_save:
+  save 900 1
+  save 300 10
+  save 60 10000
+
+redis_stopwrite_error: 'yes'
+redis_rdbcompression: 'yes'
+redis_dbfilename: dump.rdb
+redis_dir: /var/lib/redis
+
+#limits
+redis_maxclients: 10000
+redis_maxmemory: 256MB
+redis_maxmemory_policy: volatile-lru
+
+
+
+
+
